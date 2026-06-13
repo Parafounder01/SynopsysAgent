@@ -28,6 +28,28 @@ This means **`@synopsys` is available in any opencode session** with no per-proj
 @synopsys write an ICC2 floorplan script with 70% utilization
 
 @synopsys help me fix setup timing violations on clock clk
+
+@synopsys write a dc_shell Tcl script to synthesize a 32-bit RISC-V core at 500MHz
+
+@synopsys generate an ICC2 power planning script with M7/M8 stripes
+
+@synopsys run PrimeTime STA on this netlist and report setup/hold violations
+
+@synopsys debug this DRC error: short between M2 and M3 at coordinates (100,200)
+
+@synopsys create a clock tree synthesis script targeting 50ps skew
+
+@synopsys write a Formality script to verify equivalence after synthesis
+
+@synopsys optimize this path: regA -> AND2 -> regB has 150ps negative slack
+
+@synopsys generate a complete synthesis-to-GDS flow for a 7nm design with 8 SRAM macros
+
+@synopsys fix the LVS error: missing VDD connection on instance INV_X1_123
+
+@synopsys what's the difference between compile_ultra and compile -incremental_mapping?
+
+@synopsys generate a .synopsys_dc.setup template for SAED32 library
 ```
 
 ### Option 2: Per-Project Registration
