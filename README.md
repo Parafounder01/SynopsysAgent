@@ -1,213 +1,152 @@
-# SynopsysAgent — Synopsys EDA AI Subagent
+# SynopsysAgent — AI-Powered Assistant for Chip Design
 
-An AI agent specialized in **Synopsys EDA tools** for ASIC RTL-to-GDSII design flow. Covers `dc_shell` (synthesis), `icc2_shell` (physical design), PrimeTime (STA), Formality (formal verification), VCS (simulation), and ICV (DRC/LVS).
+> **Making Semiconductor Design Accessible & Fast — for Universities, Research Labs, and Industry**
 
-## Repository Structure
+SynopsysAgent is an **AI assistant** that understands and automates the world's most widely used chip design tools (Synopsys EDA). Whether you are a **student learning VLSI**, a **professor teaching Advanced Digital Design**, a **dean investing in semiconductor education**, or an **expert company taping out at 3nm** — this agent speaks your language and speeds up your work.
+
+---
+
+## Why This Matters
+
+| Audience | What This Means for You |
+|----------|------------------------|
+| **Professors & Researchers** | Automate lab setup, generate teaching scripts, explore design-space faster. Use it in VLSI courses, research projects, and publication workflows. |
+| **Deans & University Leaders** | A ready-to-deploy tool that boosts your semiconductor program's hands-on capability without hiring extra EDA experts. Students learn industry-standard flows from day one. |
+| **Expert Companies (Fabless, IDMs, Design Houses)** | Reduce tape-out iteration time. Get correct-by-construction Tcl scripts for synthesis, floorplanning, timing closure — from one AI that knows every Synopsys tool. |
+
+---
+
+## Quick Overview (For Everyone)
+
+**What is this?**  
+A file (`synopsys.md`) that turns an AI assistant into a chip design expert. Add it to [opencode](https://opencode.ai) (an open-source AI coding tool) and instantly get an engineer who knows Synopsys DC, ICC2, PrimeTime, Formality, VCS, and ICV.
+
+**What can it do?**  
+- Write correct Synopsys Tcl scripts from plain English prompts  
+- Generate complete RTL-to-GDSII design flows  
+- Debug timing violations, DRC/LVS errors  
+- Explain tool concepts and help students learn  
+- Automate repetitive EDA tasks  
+
+**How does it work?**  
+1. Install [opencode](https://opencode.ai)  
+2. Add this agent (`synopsys.md`)  
+3. Type `@synopsys <your request>` in any conversation  
+
+---
+
+## Contents of This Repository
 
 ```
 SynopsysAgent/
-├── README.md          # This file — usage guide
-├── synopsys.md        # Agent definition file (copy for opencode global agents)
-└── LICENSE            # Apache 2.0
+├── README.md        ← You are here (guide for all audiences)
+├── synopsys.md      ← The AI agent brain (the core file)
+└── LICENSE          ← Apache 2.0 — free to use and share
 ```
 
 ---
 
-## Using as an opencode Subagent
+## Getting Started in 60 Seconds
 
-### Option 1: Global Agent (Automatic @synopsys)
+### For Everyone
 
-The agent is already installed globally at `~/.config/opencode/agents/synopsys.md`.  
-This means **`@synopsys` is available in any opencode session** with no per-project configuration needed.
-
-**Invoke it from any conversation:**
-
-```
-@synopsys synthesize this RTL for best PPA
-
-@synopsys write an ICC2 floorplan script with 70% utilization
-
-@synopsys help me fix setup timing violations on clock clk
-
-@synopsys write a dc_shell Tcl script to synthesize a 32-bit RISC-V core at 500MHz
-
-@synopsys generate an ICC2 power planning script with M7/M8 stripes
-
-@synopsys run PrimeTime STA on this netlist and report setup/hold violations
-
-@synopsys debug this DRC error: short between M2 and M3 at coordinates (100,200)
-
-@synopsys create a clock tree synthesis script targeting 50ps skew
-
-@synopsys write a Formality script to verify equivalence after synthesis
-
-@synopsys optimize this path: regA -> AND2 -> regB has 150ps negative slack
-
-@synopsys generate a complete synthesis-to-GDS flow for a 7nm design with 8 SRAM macros
-
-@synopsys fix the LVS error: missing VDD connection on instance INV_X1_123
-
-@synopsys what's the difference between compile_ultra and compile -incremental_mapping?
-
-@synopsys generate a .synopsys_dc.setup template for SAED32 library
+```bash
+# 1. Install opencode (see opencode.ai)
+# 2. Copy the agent to your global agents folder
+cp synopsys.md ~/.config/opencode/agents/
+# 3. Done! Now type @synopsys in any conversation
 ```
 
-### Option 2: Per-Project Registration
+### For Faculty — Classroom Use
 
-Add to your project's `opencode.json` or `opencode.jsonc`:
+Place the agent in your course repository so all students have access:
 
 ```jsonc
+// In opencode.json at your course repo root:
 {
   "$schema": "https://opencode.ai/config.json",
   "agents": {
     "synopsys": {
-      "description": "Synopsys EDA expert for ASIC Design Flow. Covers dc_shell (synthesis) and icc2_shell (physical design) flows. Expert in RTL-to-GDSII implementation including synthesis, floorplanning, placement, CTS, routing, STA, DRC/LVS closure.",
+      "description": "Synopsys EDA expert for coursework and labs",
       "path": "./agents/synopsys.md"
     }
   }
 }
 ```
 
-Then place `synopsys.md` in your project at `./agents/synopsys.md` (copy from this repo).
+Students then run `@synopsys generate a dc_shell script for a 4-bit adder` and get a working synthesis script instantly — no manual Tcl memorization needed.
 
-### Trigger Keywords
+### For Companies — CI/CD Integration
 
-| Category | Keywords |
-|----------|----------|
-| **Synthesis** | `synopsys`, `dc_shell`, `design compiler`, `compile_ultra`, `synthesis` |
-| **Physical Design** | `icc2`, `icc2_shell`, `physical design`, `floorplan`, `placement`, `cts`, `clock tree`, `routing`, `route_auto`, `place_opt`, `clock_opt` |
-| **Timing** | `sta`, `primetime`, `pt_shell`, `timing closure`, `setup time`, `hold time`, `report_timing` |
-| **Verification** | `formality`, `formal verification`, `vcs`, `simulation`, `icv`, `drc`, `lvs` |
-| **General** | `ppa`, `qor`, `power`, `area`, `gds`, `ndm`, `tlu+`, `standard cell` |
+Add to your design flow scripts. The agent fits into any infrastructure that supports opencode subagents (including Claude Code, Copilot, and custom LLM pipelines).
 
 ---
 
-## Using with Claude Code (claude.ai / Claude Code CLI)
+## Example Prompts (Try These)
 
-### Option A: CLAUDE.md Configuration
-
-Add to your project's `CLAUDE.md`:
-
-```markdown
-# Synopsys EDA Agent
-
-When the user mentions Synopsys tools (dc_shell, icc2_shell, PrimeTime, Formality, VCS),
-load the specialized agent context from `synopsys.md`:
-
-- **synthesis** — DC: analyze, elaborate, compile_ultra, report_timing/power/qor, write_file
-- **physical design** — ICC2: floorplan, pin/macro placement, power planning, place_opt, clock_opt, route_auto, post-route opt, GDS output
-- **timing** — PrimeTime: STA, setup/hold analysis, timing closure strategies
-- **verification** — Formality (formal), VCS (simulation), ICV (DRC/LVS)
-
-Reference file: `./synopsys.md` (included in this repo)
-```
-
-### Option B: Custom Agent (Claude Code)
-
-Claude Code supports custom agent definitions. Place the `synopsys.md` content in your agent registry:
-
-```json
-{
-  "name": "synopsys",
-  "description": "Synopsys EDA expert for ASIC RTL-to-GDSII design flow",
-  "instructions": "You are an expert in Synopsys EDA tools...",
-  "triggers": ["synopsys", "dc_shell", "icc2", "synthesis", "physical design"]
-}
-```
-
-Then invoke with:
-
-```
-@synopsys write a dc_shell synthesis script for a 32-bit RISC-V core
-```
+| Your Role | Try Asking |
+|-----------|-----------|
+| **Student** | `@synopsys explain what compile_ultra does in plain English` |
+| **Professor** | `@synopsys create a lab handout for synthesizing a 5-stage pipelined CPU` |
+| **Researcher** | `@synopsys generate a dc_shell script for our DNN accelerator at 7nm, target 1GHz` |
+| **Dean** | `@synopsys summarize how this tool helps students learn industry VLSI flows` |
+| **Design Engineer** | `@synopsys write an ICC2 floorplan script with 70% utilization and 8 memory macros` |
+| **TA** | `@synopsys create a .synopsys_dc.setup template with standard library paths` |
 
 ---
 
-## Capabilities
+## What's Inside the Agent (synopsys.md)
 
-### 1. Design Compiler (dc_shell) — Synthesis
+The core file contains deep expertise across the entire Synopsys toolchain:
 
-| Area | Details |
-|------|---------|
-| **Flow** | analyze → elaborate → constrain → compile_ultra → report → write_outputs |
-| **Commands** | `analyze`, `elaborate`, `compile_ultra`, `compile -incremental_mapping`, `set_max_delay`, `set_input/output_delay`, `set_false_path`, `set_multicycle_path`, `set_dont_touch`, `set_clock_gating_style` |
-| **Reports** | `report_timing`, `report_power`, `report_area`, `report_qor`, `report_clock_gating`, `check_design` |
-| **Outputs** | Verilog netlist, SDC, SDF, DB |
-| **Setup** | `.synopsys_dc.setup` with `search_path`, `target_library`, `link_library`, `symbol_library` |
-
-### 2. IC Compiler II (icc2_shell) — Physical Design
-
-| Stage | Key Commands |
-|-------|-------------|
-| **Library Setup** | `create_lib`, `read_verilog`, `read_parasitic_tech` |
-| **Floorplanning** | `initialize_floorplan`, `set_block_pin_constraints`, `place_pins` |
-| **Macro Placement** | `create_keepout_margin`, `set_fixed_objects`, `derive_placement_blockages` |
-| **Power Planning** | `check_pg_connectivity`, `set_pg_strategy` |
-| **Placement** | `create_placement`, `legalize_placement`, `place_opt` |
-| **CTS** | `set_clock_tree_options`, `clock_opt`, `report_clock_qor` |
-| **Routing** | `set_ignored_layers`, `route_auto`, `optimize_routes` |
-| **Verification** | `check_routes`, `check_lvs` |
-| **Output** | `write_gds`, `write_verilog` |
-
-### 3. PrimeTime (pt_shell) — Static Timing Analysis
-
-Setup/hold analysis, timing closure guidance, constraint validation, report generation.
-
-### 4. Formality — Formal Verification
-
-Equivalence checking between RTL and gate-level netlist.
-
-### 5. VCS — Simulation
-
-RTL simulation, testbench generation, waveform analysis.
-
-### 6. ICV — Physical Verification
-
-DRC (design rule checking) and LVS (layout vs. schematic).
+| Tool | Purpose | What the Agent Generates |
+|------|---------|------------------------|
+| **Design Compiler (dc_shell)** | Logic synthesis (RTL → gates) | Complete synthesis scripts, constraints, reports |
+| **IC Compiler II (icc2_shell)** | Physical design (gates → layout) | Full P&R flow: floorplan → route → GDS |
+| **PrimeTime (pt_shell)** | Static timing analysis | Timing reports, ECO guidance, constraint checks |
+| **Formality (fc_shell)** | Formal verification | Equivalence checking scripts |
+| **VCS** | RTL simulation | Testbenches, simulation scripts |
+| **ICV / IC Validator** | Physical verification | DRC/LVS run decks and debugging |
 
 ---
 
-## Example Use Cases
+## Technical Details (for Expert Companies)
 
-### Synthesis Script Generation
+### Supported Tools & Protocols
 
-> @synopsys write a dc_shell script to synthesize a 32-bit RISC-V core with compile_ultra, targeting 500 MHz at 0.95V nominal corner. Output reports for timing, power, and area.
+- **Synthesis**: dc_shell, Design Compiler Graphical, compile_ultra, topographical mode
+- **Physical Design**: ICC2, floorplanning, power planning, placement, CTS, routing, GDS output
+- **Timing**: PrimeTime STA, setup/hold/multi-corner analysis, timing closure strategies
+- **Verification**: Formality (LEC), VCS (simulation), ICV (DRC/LVS)
+- **Formats**: Verilog, SDC, SDF, DEF/LEF, GDSII, LEF, Milkyway, NDM
 
-### ICC2 Floorplan Setup
+### Reference Flows
 
-> @synopsys create an ICC2 floorplan script with 70% core utilization, 5um core offset, keepout margins around 8 macros, and pin placement on M5/M6 layers.
-
-### Timing Fix Guidance
-
-> @synopsys I have a setup violation on path from regA/Q to regB/D with 150ps of negative slack. The path goes through a 2-input AND gate. What strategies should I try?
-
-### Formal Verification
-
-> @synopsys write a Formality script to verify equivalence between my RTL and the synthesized netlist for the top module.
-
-### Full RTL-to-GDSII Flow
-
-> @synopsys walk me through the complete RTL-to-GDSII flow for a design with 8 SRAM macros, target frequency 1GHz, 7nm technology. Include all synthesis, floorplan, and routing steps.
+The agent documents complete Tcl scripts for:
+- `.synopsys_dc.setup` library configuration
+- Synthesis with `analyze → elaborate → compile_ultra → report → write`
+- 13-stage ICC2 physical design flow
+- PrimeTime multi-corner STA
+- Formality equivalence checking setup
 
 ---
 
-## Configuration File: synopsys.md
+## Integration Options
 
-The file `synopsys.md` in this repo is the **opencode agent definition**. It contains:
-
-- **Frontmatter** — description, permission model, trigger metadata
-- **Tool invocation table** — dc_shell, icc2_shell, pt_shell, starrc_shell, ICV, fc_shell
-- **DC synthesis flow** — full step-by-step Tcl with library setup, compile, reports, outputs
-- **ICC2 physical design flow** — complete 13-stage flow from library setup to GDS output
-- **Tcl scripting patterns** — collection queries, attribute handling, loops, filtering
-- **Project file structure** — recommended directory layout for synthesis and PD
-- **Technology references** — SAED32 library, metal layer stack, standard checks
-- **Parameter summary** — typical values for utilization, offset, skew, transition, etc.
-
-To use it as a global opencode agent, copy to `~/.config/opencode/agents/synopsys.md` (already installed).
+| Platform | How to Use |
+|----------|-----------|
+| **opencode** | Copy to `~/.config/opencode/agents/` — global `@synopsys` |
+| **Claude Code** | Reference `synopsys.md` in `CLAUDE.md` |
+| **GitHub Copilot / Custom LLM** | Use the agent definition as a system prompt |
 
 ---
 
 ## License
 
-Apache License 2.0
+Apache License 2.0 — free to use, modify, and share.
+
+---
+
+**Build By: anantha pavithra**
+
+*Built for professors who teach, deans who invest, and companies who build the future of silicon.*
