@@ -39,9 +39,10 @@ A file (`synopsys.md`) that turns an AI assistant into a chip design expert. Add
 
 ```
 SynopsysAgent/
-├── README.md        ← You are here (guide for all audiences)
-├── synopsys.md      ← The AI agent brain (the core file)
-└── LICENSE          ← Apache 2.0 — free to use and share
+├── README.md           ← You are here (guide for all audiences)
+├── synopsys.md         ← The AI agent brain (the core file)
+├── CLAUDE-FABLE-5.md   ← Reference: Anthropic Claude Fable 5 system prompt
+└── LICENSE             ← Apache 2.0 — free to use and share
 ```
 
 ---
@@ -140,6 +141,17 @@ The agent documents complete Tcl scripts for:
 | **GitHub Copilot / Custom LLM** | Use the agent definition as a system prompt |
 
 ---
+
+## Reference: Claude Fable 5 System Prompt
+
+This repository includes [`CLAUDE-FABLE-5.md`](./CLAUDE-FABLE-5.md), the complete system prompt for **Anthropic's Claude Fable 5** — the most advanced generally available Claude model. It is sourced from the public [CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S) repository by elder-plinius.
+
+This document is a valuable reference for:
+- **AI behavior design**: Study how safety, refusal handling, tone, and user wellbeing are encoded at the system level
+- **Prompt engineering**: See how a production-grade system prompt is structured with clear sections, decision trees, and fallback behaviors
+- **Agent architecture**: Understand the MCP app suggestion system, computer use skills, artifact storage patterns, and search instructions that power a state-of-the-art AI agent
+
+While the SynopsysAgent focuses on EDA tool expertise, this system prompt represents the frontier of AI instruction design — relevant context for anyone building or studying advanced AI agents.
 
 ## License
 
