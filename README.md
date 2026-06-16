@@ -92,7 +92,7 @@ Add to your design flow scripts. The agent fits into any infrastructure that sup
 | **Researcher** | `@synopsys generate a dc_shell script for our DNN accelerator at 7nm, target 1GHz` |
 | **Dean** | `@synopsys summarize how this tool helps students learn industry VLSI flows` |
 | **Design Engineer** | `@synopsys write an ICC2 floorplan script with 70% utilization and 8 memory macros` |
-| **TA** | `@synopsys create a .synopsys_dc.setup template with standard library paths` |
+| **Lab assistant** | `@synopsys create a .synopsys_dc.setup template with standard library paths` |
 
 ---
 
